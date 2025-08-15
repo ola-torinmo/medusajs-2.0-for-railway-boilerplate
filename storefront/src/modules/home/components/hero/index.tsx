@@ -1,34 +1,42 @@
-import { Github } from "@medusajs/icons"
+import Image from "next/image"
+import Link from "next/link"
 import { Button, Heading } from "@medusajs/ui"
+import sophi from '../../../../../public/sophihero.png'
+import arrow from '../../../../../public/arrow.png'
 
 const Hero = () => {
   return (
-    <div className="h-[75vh] w-full border-b border-ui-border-base relative bg-ui-bg-subtle">
-      <div className="absolute inset-0 z-10 flex flex-col justify-center items-center text-center small:p-32 gap-6">
-        <span>
-          <Heading
-            level="h1"
-            className="text-3xl leading-10 text-ui-fg-base font-normal"
-          >
-            Well done! You have successfully deployed your Medusa 2.0 store on Railway!
-          </Heading>
-          <Heading
-            level="h2"
-            className="text-3xl leading-10 text-ui-fg-subtle font-normal"
-          >
-            Need help customizing your store?
-          </Heading>
-        </span>
-        <a
-          href="https://funkyton.com/medusajs-2-0-is-finally-here/"
-          target="_blank"
-        >
-          <h1 style={{ textDecoration: "underline" }}>
-            Visit the tutorial
-          </h1>
-        </a>
-      </div>
+    <section className="relative">
+  {/* Image + card wrapper */}
+  <div className="relative w-full md:h-[710px] h-[350px] overflow-hidden">
+    {/* Background Image */}
+    <Image
+      src={sophi}
+      alt="Hero background"
+      fill
+      className=""
+      priority
+    />
+
+    {/* Product info card – now absolutely positioned */}
+    <div className="absolute bottom-[0%] right-[0%] bg-white md:w-[450px] w-[250px] md:h-[218px] h-[100px] shadow-sm p-[30px] ">
+      <h2 className="md:text-[26px] text-[22px] font-semibold text-[#101010] mb-2 ">
+        BANANA POWDER
+      </h2>
+      <h3 className="md:text-[26px] text-[22px] font-semibold text-[#101010] mb-6 ">
+        MATTE FINISH
+      </h3>
+      
+      <Link 
+        href="/products/banana-powder"
+        className="inline-block bg-[#B07A5D] text-white font-semibold py-[10.5px] px-[25px] rounded transition-colors duration-200 uppercase tracking-wide"
+      >
+        DISCOVER <Image src={arrow} alt="Arrow" width={20} height={20} className="inline-block ml-1 mb-1.5" />
+      </Link>
     </div>
+  </div>
+</section>
+
   )
 }
 

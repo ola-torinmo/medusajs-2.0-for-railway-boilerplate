@@ -21,28 +21,42 @@ const regionMap = new Map<string, HttpTypes.StoreRegion>()
 
 export const getRegion = cache(async function (countryCode: string) {
   try {
-    if (regionMap.has(countryCode)) {
+    // 1. Return cached region if available
+    if (countryCode && regionMap.has(countryCode)) {
       return regionMap.get(countryCode)
     }
 
+    // 2. Fetch regions from Medusa
     const regions = await listRegions()
-
-    if (!regions) {
+    if (!regions || regions.length === 0) {
+      console.warn("⚠️ No regions found from Medusa API")
       return null
     }
 
+    // 3. Populate regionMap
     regions.forEach((region) => {
       region.countries?.forEach((c) => {
-        regionMap.set(c?.iso_2 ?? "", region)
+        if (c?.iso_2) {
+          regionMap.set(c.iso_2, region)
+        }
       })
     })
 
-    const region = countryCode
-      ? regionMap.get(countryCode)
-      : regionMap.get("us")
+    // 4. Match requested countryCode OR fall back to first region
+    let region = null
+    if (countryCode) {
+      region = regionMap.get(countryCode)
+      if (!region) {
+        console.warn(`⚠️ No matching region for countryCode="${countryCode}". Falling back to first region.`)
+        region = regions[0]
+      }
+    } else {
+      region = regions[0]
+    }
 
     return region
   } catch (e: any) {
+    console.error("❌ Error getting region:", e)
     return null
   }
 })

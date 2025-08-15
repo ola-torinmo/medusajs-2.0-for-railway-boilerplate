@@ -11,16 +11,26 @@ type LineItemPriceProps = {
 }
 
 const LineItemPrice = ({ item, style = "default" }: LineItemPriceProps) => {
-  const { currency_code, calculated_price_number, original_price_number } =
-    getPricesForVariant(item.variant) ?? {}
+  // Get the normalized price object (may be null)
+  const priceObj = getPricesForVariant(item.variant)
 
-  const adjustmentsSum = (item.adjustments || []).reduce(
-    (acc, adjustment) => adjustment.amount + acc,
-    0
-  )
+  // Provide safe defaults
+  const currency_code: string = priceObj?.currency_code ?? process.env.NEXT_PUBLIC_CURRENCY_CODE?.toUpperCase() ?? "NGN"
+  const calculated_price_number: number = priceObj?.calculated_price_number ?? 0
+  // If original_price_number missing, fall back to calculated (so comparisons work)
+  const original_price_number: number = priceObj?.original_price_number ?? calculated_price_number
 
-  const originalPrice = original_price_number * item.quantity
-  const currentPrice = calculated_price_number * item.quantity - adjustmentsSum
+  // Sum adjustments (defensive)
+  const adjustmentsSum: number = (item.adjustments || []).reduce((acc: number, adjustment: any) => {
+    const amt = typeof adjustment?.amount === "number" ? adjustment.amount : Number(adjustment?.amount) || 0
+    return acc + amt
+  }, 0)
+
+  // Quantities should exist on both cart and order line items
+  const qty = typeof item.quantity === "number" ? item.quantity : Number(item.quantity) || 1
+
+  const originalPrice = original_price_number * qty
+  const currentPrice = calculated_price_number * qty - adjustmentsSum
   const hasReducedPrice = currentPrice < originalPrice
 
   return (
@@ -38,7 +48,7 @@ const LineItemPrice = ({ item, style = "default" }: LineItemPriceProps) => {
               >
                 {convertToLocale({
                   amount: originalPrice,
-                  currency_code,
+                  currency_code, // always a string now
                 })}
               </span>
             </p>
@@ -57,7 +67,7 @@ const LineItemPrice = ({ item, style = "default" }: LineItemPriceProps) => {
         >
           {convertToLocale({
             amount: currentPrice,
-            currency_code,
+            currency_code, // always a string now
           })}
         </span>
       </div>

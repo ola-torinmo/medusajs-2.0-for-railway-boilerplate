@@ -11,11 +11,11 @@ type BestsellersProps = {
 
 const Bestsellers = ({ products, region }: BestsellersProps) => {
   return (
-    <div className="py-16 bg-gray-50">
+    <div className="py-16 bg-[#F9F5F2]">
       <div className="content-container">
         {/* Section Header */}
         <div className="mb-12 text-center">
-          <h2 className="text-[28px] font-bold text-gray-900 mb-2 uppercase tracking-wide">
+          <h2 className="text-[26px] font-bold text-gray-900 mb-2 uppercase tracking-wide">
             SHOP OUR BESTSELLER ITEMS
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto">

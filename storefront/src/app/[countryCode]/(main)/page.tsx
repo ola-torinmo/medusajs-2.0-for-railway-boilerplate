@@ -48,7 +48,7 @@ export default async function Home(props: {
     {/* <Testimonial/> */}
       
       {/* Existing Featured Products */}
-      <div className="py-12">
+      <div className="">
         <ul className="flex flex-col gap-x-6">
           <FeaturedProducts collections={collections} region={region} />
         </ul>

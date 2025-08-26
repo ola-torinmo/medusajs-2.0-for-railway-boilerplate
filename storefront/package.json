@@ -16,7 +16,10 @@
     "build:next": "next build",
     "lint": "next lint",
     "analyze": "ANALYZE=true next build",
-    "test-e2e": "playwright test e2e"
+    "test-e2e": "playwright test e2e",
+     "check:setup": "node scripts/check-medusa-setup.js",
+    "check:product": "node scripts/test-product.js",
+    "debug:all": "npm run check:setup && npm run check:product"
   },
   "resolutions": {
     "webpack": "^5"

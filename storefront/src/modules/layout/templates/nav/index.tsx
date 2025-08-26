@@ -3,7 +3,9 @@ import { listRegions } from "@lib/data/regions"
 import { StoreRegion } from "@medusajs/types"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import CartButton from "@modules/layout/components/cart-button"
-import SideMenu from "@modules/layout/components/side-menu"
+// import SideMenu from "@modules/layout/components/side-menu"
+import heart from '../../../../../public/heart.png'
+import search from '../../../../../public/search.png'
 import { Search, Heart } from "lucide-react"
 import Image from "next/image"
 import cart from '../../../../../public/cart.png'
@@ -23,14 +25,14 @@ export default async function Nav() {
       </div>
 
       {/* Main Navigation */}
-      <header className="relative py-[35px] mx-auto duration-200 bg-white border-ui-border-base">
+      <header className="relative py-[35px] mx-auto duration-200 bg-[#F9F5F2] border-ui-border-base">
         <nav className="content-container flex items-center justify-between w-full h-full">
           
           {/* Left side - Mobile menu only */}
           <div className="flex-1 basis-0 h-full flex items-center">
-            <div className="h-full block md:hidden">
+            {/* <div className="h-full block md:hidden">
               <SideMenu regions={regions} />
-            </div>
+            </div> */}
             {/* Logo */}
             <LocalizedClientLink
               href="/"
@@ -49,31 +51,31 @@ export default async function Nav() {
             <div className="hidden md:flex items-center space-x-8">
               <LocalizedClientLink 
                 href="/products" 
-                className="text-[#101010CC] hover:text-gray-600 text-[14px] font-semibold uppercase "
+                className="text-[#10101080] hover:text-[#101010] text-[14px] font-semibold uppercase "
               >
                 NEW
               </LocalizedClientLink>
               <LocalizedClientLink 
                 href="/collections/bestsellers" 
-                className="text-[#101010CC] hover:text-gray-600 text-[14px] font-semibold uppercase "
+                className="text-[#10101080] hover:text-[#101010] text-[14px] font-semibold uppercase "
               >
                 BESTSELLERS
               </LocalizedClientLink>
               <LocalizedClientLink 
                 href="/collections/skin" 
-                className="text-[#101010CC] hover:text-gray-600 text-[14px] font-semibold uppercase "
+                className="text-[#10101080] hover:text-[#101010] text-[14px] font-semibold uppercase "
               >
                 SKIN
               </LocalizedClientLink>
               <LocalizedClientLink 
                 href="/collections/lips" 
-                className="text-[#101010CC] hover:text-gray-600 text-[14px] font-semibold uppercase "
+                className="text-[#10101080] hover:text-[#101010] text-[14px] font-semibold uppercase "
               >
                 LIPS
               </LocalizedClientLink>
               <LocalizedClientLink 
                 href="/collections/findyourshade" 
-                className="text-[#101010CC] hover:text-gray-600 text-[14px] font-semibold uppercase "
+                className="text-[#10101080] hover:text-[#101010] text-[14px] font-semibold uppercase "
               >
                 FINDYOURSHADE
               </LocalizedClientLink>
@@ -85,10 +87,10 @@ export default async function Nav() {
             {/* Desktop Icons - Hidden on small screens */}
             <div className="hidden small:flex items-center gap-x-4">
               <button className="text-gray-600 hover:text-gray-900">
-                <Search size={20} />
+                <Image src={search} alt="search" className="h-5 w-5 mt-1"/>
               </button>
               <button className="text-gray-600 hover:text-gray-900">
-                <Heart size={20} />
+                <Image src={heart} alt="wishlist" className="h-5 w-5 mt-1"/>
               </button>
               {/* <LocalizedClientLink
                 className="hover:text-ui-fg-base"

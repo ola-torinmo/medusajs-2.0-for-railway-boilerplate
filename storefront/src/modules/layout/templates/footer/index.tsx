@@ -24,7 +24,7 @@ export default async function Footer() {
     <footer className="w-full">
 
       {/* Main Footer */}
-      <div className="bg-white ">
+      <div className="bg-[#F9F5F2] ">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           {/* Social Media Icons */}
           <div className="border-t border-gray-200 my-6"></div>
@@ -61,34 +61,34 @@ export default async function Footer() {
           <div className="flex flex-wrap justify-center gap-x-8 gap-y-4 mb-8">
             <LocalizedClientLink 
               href="/about" 
-              className="text-gray-600 hover:text-gray-900 text-sm uppercase tracking-wide font-medium"
+              className="text-[#10101080] hover:text-[#101010] text-sm uppercase tracking-wide font-semibold"
             >
               ABOUT US
             </LocalizedClientLink>
             <LocalizedClientLink 
               href="/shipping" 
-              className="text-gray-600 hover:text-gray-900 text-sm uppercase tracking-wide font-medium"
+              className="text-[#10101080] hover:text-[#101010] text-sm uppercase tracking-wide font-semibold"
             >
               SHIPPING & DELIVERY
             </LocalizedClientLink>
             <LocalizedClientLink 
               href="/returns" 
-              className="text-gray-600 hover:text-gray-900 text-sm uppercase tracking-wide font-medium"
+              className="text-[#10101080] hover:text-[#101010] text-sm uppercase tracking-wide font-semibold"
             >
               RETURN POLICY
             </LocalizedClientLink>
             <LocalizedClientLink 
               href="/terms" 
-              className="text-gray-600 hover:text-gray-900 text-sm uppercase tracking-wide font-medium"
+              className="text-[#10101080] hover:text-[#101010] text-sm uppercase tracking-wide font-semibold"
             >
               TERMS & CONDITIONS
             </LocalizedClientLink>
-            <LocalizedClientLink 
+            {/* <LocalizedClientLink 
               href="/privacy" 
               className="text-gray-600 hover:text-gray-900 text-sm uppercase tracking-wide font-medium"
             >
               PRIVACY POLICY
-            </LocalizedClientLink>
+            </LocalizedClientLink> */}
           </div>
           
           {/* Copyright */}

@@ -18,6 +18,8 @@ type ProductActionsProps = {
   product: HttpTypes.StoreProduct
   region: HttpTypes.StoreRegion
   disabled?: boolean
+  initialQuantity?: number        // Add this
+  fallbackPriceData?: any        // Add this
 }
 
 const optionsAsKeymap = (variantOptions: any) => {
@@ -33,6 +35,8 @@ export default function ProductActions({
   product,
   region,
   disabled,
+  initialQuantity = 1,      // Add this with default value
+  fallbackPriceData,        // Add this
 }: ProductActionsProps) {
   const [options, setOptions] = useState<Record<string, string | undefined>>({})
   const [isAdding, setIsAdding] = useState(false)
@@ -119,52 +123,52 @@ export default function ProductActions({
   const actionsRef = useRef<HTMLDivElement>(null)
   const inView = useIntersection(actionsRef, "0px")
 
-  // Enhanced add to cart with better error handling and user feedback
-  const handleAddToCart = async () => {
-    if (!selectedVariant?.id) {
-      console.error("No variant selected for add to cart")
-      return null
-    }
+// Enhanced add to cart with better error handling and user feedback
+const handleAddToCart = async () => {
+  if (!selectedVariant?.id) {
+    console.error("No variant selected for add to cart")
+    return null
+  }
 
-    console.log("Adding to cart:", {
+  console.log("Adding to cart:", {
+    variantId: selectedVariant.id,
+    productTitle: product.title,
+    variantTitle: selectedVariant.title,
+    quantity: initialQuantity, // Use the initialQuantity prop instead of hardcoded 1
+    countryCode
+  })
+
+  setIsAdding(true)
+  setAddToCartStatus('idle')
+
+  try {
+    const result = await addToCart({
       variantId: selectedVariant.id,
-      productTitle: product.title,
-      variantTitle: selectedVariant.title,
-      quantity: 1,
-      countryCode
+      quantity: initialQuantity, // Use the initialQuantity prop instead of hardcoded 1
+      countryCode,
     })
 
-    setIsAdding(true)
-    setAddToCartStatus('idle')
+    console.log("Add to cart success:", result)
+    setAddToCartStatus('success')
+    
+    // Optional: Refresh the page to update cart counter immediately
+    // This ensures the cart icon in navigation updates
+    setTimeout(() => {
+      router.refresh()
+    }, 500)
 
-    try {
-      const result = await addToCart({
-        variantId: selectedVariant.id,
-        quantity: 1,
-        countryCode,
-      })
-
-      console.log("Add to cart success:", result)
-      setAddToCartStatus('success')
-      
-      // Optional: Refresh the page to update cart counter immediately
-      // This ensures the cart icon in navigation updates
-      setTimeout(() => {
-        router.refresh()
-      }, 500)
-
-    } catch (error) {
-      console.error("Add to cart error:", error)
-      setAddToCartStatus('error')
-    } finally {
-      setIsAdding(false)
-      
-      // Reset status after 3 seconds
-      setTimeout(() => {
-        setAddToCartStatus('idle')
-      }, 3000)
-    }
+  } catch (error) {
+    console.error("Add to cart error:", error)
+    setAddToCartStatus('error')
+  } finally {
+    setIsAdding(false)
+    
+    // Reset status after 3 seconds
+    setTimeout(() => {
+      setAddToCartStatus('idle')
+    }, 3000)
   }
+}
 
   // Get button text based on state
   const getButtonText = () => {
@@ -187,7 +191,7 @@ export default function ProductActions({
     <>
       <div className="flex flex-col gap-y-2" ref={actionsRef}>
         {/* Debug Panel */}
-        <div className="bg-blue-50 p-3 rounded text-xs border border-blue-200">
+        {/* <div className="bg-blue-50 p-3 rounded text-xs border border-blue-200">
           <p className="font-semibold text-blue-800 mb-1">🔧 Add to Cart Debug:</p>
           <div className="space-y-1 text-blue-700">
             <p><strong>Selected Variant:</strong> {selectedVariant?.id || 'None'}</p>
@@ -196,7 +200,7 @@ export default function ProductActions({
             <p><strong>Inventory Managed:</strong> {selectedVariant?.manage_inventory ? 'Yes' : 'No'}</p>
             <p><strong>Quantity Available:</strong> {selectedVariant?.inventory_quantity || 'N/A'}</p>
           </div>
-        </div>
+        </div> */}
 
         <div>
           {(product.variants?.length ?? 0) > 1 && (
@@ -221,7 +225,7 @@ export default function ProductActions({
           )}
         </div>
 
-        <ProductPrice product={product} variant={selectedVariant} />
+        <ProductPrice product={product} variant={selectedVariant} fallbackPriceData={fallbackPriceData} hidePrice={true}/>
 
         {/* Enhanced Add to Cart Button */}
         <Button

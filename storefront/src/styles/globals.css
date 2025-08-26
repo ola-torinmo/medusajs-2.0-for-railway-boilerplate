@@ -49,6 +49,22 @@
   }
 }
 
+@font-face {
+  font-family: 'Oswald';
+  src: url('../../public/oswald/Oswald-Regular.ttf') format('truetype');
+  
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Didact Gothic';
+  src: url('../../public/didact-gothic/DidactGothic-Regular.ttf') format('truetype');
+  
+  font-style: normal;
+  font-display: swap;
+}
+
 @layer components {
   .content-container {
     @apply max-w-[1440px] w-full mx-auto px-6;
@@ -110,3 +126,9 @@
     @apply text-[32px] leading-[44px] font-semibold;
   }
 }
+
+  p{
+    letter-spacing: 1%;
+  }
+
+  

@@ -1,62 +1,83 @@
+// lib/data/regions.ts
 import { sdk } from "@lib/config"
-import medusaError from "@lib/util/medusa-error"
 import { cache } from "react"
-import { HttpTypes } from "@medusajs/types"
-
-export const listRegions = cache(async function () {
-  return sdk.store.region
-    .list({}, { next: { tags: ["regions"] } })
-    .then(({ regions }) => regions)
-    .catch(medusaError)
-})
-
-export const retrieveRegion = cache(async function (id: string) {
-  return sdk.store.region
-    .retrieve(id, {}, { next: { tags: ["regions"] } })
-    .then(({ region }) => region)
-    .catch(medusaError)
-})
-
-const regionMap = new Map<string, HttpTypes.StoreRegion>()
 
 export const getRegion = cache(async function (countryCode: string) {
   try {
-    // 1. Return cached region if available
-    if (countryCode && regionMap.has(countryCode)) {
-      return regionMap.get(countryCode)
-    }
-
-    // 2. Fetch regions from Medusa
-    const regions = await listRegions()
-    if (!regions || regions.length === 0) {
-      console.warn("⚠️ No regions found from Medusa API")
-      return null
-    }
-
-    // 3. Populate regionMap
-    regions.forEach((region) => {
-      region.countries?.forEach((c) => {
-        if (c?.iso_2) {
-          regionMap.set(c.iso_2, region)
+    // Special handling for Nigeria
+    if (countryCode === 'ng') {
+      const nigeriaRegionId = process.env.NEXT_PUBLIC_REGION_ID
+      
+      if (nigeriaRegionId) {
+        // Try to get by ID directly
+        const regions = await sdk.store.region.list(
+          { id: [nigeriaRegionId] },
+          { next: { tags: ["regions"] } }
+        )
+        
+        if (regions.regions?.length > 0) {
+          console.log('Found Nigeria region by ID:', regions.regions[0].id)
+          return regions.regions[0]
         }
-      })
-    })
-
-    // 4. Match requested countryCode OR fall back to first region
-    let region = null
-    if (countryCode) {
-      region = regionMap.get(countryCode)
-      if (!region) {
-        console.warn(`⚠️ No matching region for countryCode="${countryCode}". Falling back to first region.`)
-        region = regions[0]
       }
-    } else {
-      region = regions[0]
     }
+    
+    // Get all regions and find by country code
+    const allRegions = await sdk.store.region.list(
+      {},
+      { next: { tags: ["regions"] } }
+    )
+    
+    // Find region that contains the country
+    const region = allRegions.regions?.find(r => 
+      r.countries?.some(c => 
+        c.iso_2?.toLowerCase() === countryCode.toLowerCase()
+      )
+    )
+    
+    if (region) {
+      console.log(`Found region for ${countryCode}:`, region.id, region.currency_code)
+      return region
+    }
+    
+    // Special case: if looking for Nigeria by 'ng', also check currency
+    if (countryCode === 'ng') {
+      const ngRegion = allRegions.regions?.find(r => 
+        r.currency_code === 'NGN'
+      )
+      if (ngRegion) {
+        console.log('Found Nigeria region by currency:', ngRegion.id)
+        return ngRegion
+      }
+    }
+    
+    // If no region found for country code, return first available region
+    console.warn(`No region found for country code: ${countryCode}, using first available region`)
+    return allRegions.regions?.[0] || null
+    
+  } catch (error) {
+    console.error('Error fetching region:', error)
+    return null
+  }
+})
 
-    return region
-  } catch (e: any) {
-    console.error("❌ Error getting region:", e)
+export const listRegions = cache(async function () {
+  return sdk.store.region.list(
+    {},
+    { next: { tags: ["regions"] } }
+  ).then(({ regions }) => regions)
+})
+
+// Helper function to get region by ID directly
+export const getRegionById = cache(async function (regionId: string) {
+  try {
+    const regions = await sdk.store.region.list(
+      { id: [regionId] },
+      { next: { tags: ["regions"] } }
+    )
+    return regions.regions?.[0] || null
+  } catch (error) {
+    console.error('Error fetching region by ID:', error)
     return null
   }
 })

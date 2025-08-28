@@ -20,11 +20,11 @@ export default function OrderCompletedTemplate({
   const isOnboarding = cookies().get("_medusa_onboarding")?.value === "true"
 
   return (
-    <div className="py-6 min-h-[calc(100vh-64px)]">
+    <div className="py-6 min-h-[calc(100vh-64px)] bg-[#F9F5F2]">
       <div className="content-container flex flex-col justify-center items-center gap-y-10 max-w-4xl h-full w-full">
         {isOnboarding && <OnboardingCta orderId={order.id} />}
         <div
-          className="flex flex-col gap-4 max-w-4xl h-full bg-white w-full py-10"
+          className="flex flex-col gap-4 max-w-4xl h-full bg-[#F9F5F2] w-full py-10"
           data-testid="order-complete-container"
         >
           <Heading

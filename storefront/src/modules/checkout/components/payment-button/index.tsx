@@ -76,6 +76,8 @@ const GiftCardPaymentButton = () => {
       onClick={handleOrder}
       isLoading={submitting}
       data-testid="submit-order-button"
+      className="bg-[#B07A5D] hover:bg-[#8c5a43]"
+      
     >
       Place order
     </Button>
@@ -178,6 +180,7 @@ const StripePaymentButton = ({
         size="large"
         isLoading={submitting}
         data-testid={dataTestId}
+        className="bg-[#B07A5D] hover:bg-[#8c5a43]"
       >
         Place order
       </Button>
@@ -287,6 +290,7 @@ const ManualTestPaymentButton = ({ notReady }: { notReady: boolean }) => {
         onClick={handlePayment}
         size="large"
         data-testid="submit-order-button"
+        className="bg-[#B07A5D] hover:bg-[#8c5a43]"
       >
         Place order
       </Button>

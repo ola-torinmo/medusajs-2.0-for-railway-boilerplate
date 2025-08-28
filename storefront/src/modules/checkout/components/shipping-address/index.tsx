@@ -108,6 +108,7 @@ const ShippingAddress = ({
           onChange={handleChange}
           required
           data-testid="shipping-first-name-input"
+          // className="bg-[#F9F5F2] border-[#DADEE3]"
         />
         <Input
           label="Last name"
@@ -117,6 +118,7 @@ const ShippingAddress = ({
           onChange={handleChange}
           required
           data-testid="shipping-last-name-input"
+          // className="bg-[#F9F5F2] border-[#DADEE3]"
         />
         <Input
           label="Address"
@@ -126,6 +128,7 @@ const ShippingAddress = ({
           onChange={handleChange}
           required
           data-testid="shipping-address-input"
+          // className="bg-[#F9F5F2] border rounded-[5px] w-[310px] h-[44px] border-[#DADEE3]"
         />
         <Input
           label="Company"

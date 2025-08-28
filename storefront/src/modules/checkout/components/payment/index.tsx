@@ -114,7 +114,7 @@ const Payment = ({
   }, [isOpen])
 
   return (
-    <div className="bg-white">
+    <div className="bg-[#F9F5F2]">
       <div className="flex flex-row items-center justify-between mb-6">
         <Heading
           level="h2"
@@ -126,7 +126,7 @@ const Payment = ({
             }
           )}
         >
-          Payment
+          <h1>Payment </h1>
           {!isOpen && paymentReady && <CheckCircleSolid />}
         </Heading>
         {!isOpen && paymentReady && (
@@ -207,7 +207,7 @@ const Payment = ({
 
           <Button
             size="large"
-            className="mt-6"
+            className="mt-6 bg-[#B07A5D] hover:bg-[#8c5a43]"
             onClick={handleSubmit}
             isLoading={isLoading}
             disabled={

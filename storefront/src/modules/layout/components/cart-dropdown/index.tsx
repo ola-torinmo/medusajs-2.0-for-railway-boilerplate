@@ -104,7 +104,7 @@ const CartDropdown = ({
         >
           <Popover.Panel
             static
-            className="hidden small:block absolute top-[calc(100%+1px)] right-0 bg-white border-x border-b border-gray-200 w-[420px] text-ui-fg-base"
+            className="hidden small:block absolute top-[calc(100%+1px)] right-0 bg-[#F9F5F2] border-x border border-gray-200 w-[420px] text-ui-fg-base"
             data-testid="nav-cart-dropdown"
           >
             <div className="p-4 flex items-center justify-center">
@@ -147,11 +147,14 @@ const CartDropdown = ({
                                     {item.title}
                                   </LocalizedClientLink>
                                 </h3>
-                                <LineItemOptions
+                                {/* <LineItemOptions
                                   variant={item.variant}
                                   data-testid="cart-item-variant"
                                   data-value={item.variant}
-                                />
+                                /> */}
+                                <div className="flex justify-start">
+                                <LineItemPrice item={item} style="tight" />
+                              </div>
                                 <span
                                   data-testid="cart-item-quantity"
                                   data-value={item.quantity}
@@ -159,14 +162,14 @@ const CartDropdown = ({
                                   Quantity: {item.quantity}
                                 </span>
                               </div>
-                              <div className="flex justify-end">
+                              {/* <div className="flex justify-end">
                                 <LineItemPrice item={item} style="tight" />
-                              </div>
+                              </div> */}
                             </div>
                           </div>
                           <DeleteButton
                             id={item.id}
-                            className="mt-1"
+                            className="mt-2"
                             data-testid="cart-item-remove-button"
                           >
                             Remove
@@ -194,11 +197,11 @@ const CartDropdown = ({
                   </div>
                   <LocalizedClientLink href="/cart" passHref>
                     <Button
-                      className="w-full"
+                      className="w-full bg-[#B07A5D] border-[#B07A5D] hover:bg-[#9c6148] hover:border-[#9c6148] focus:bg-[#9c6148] focus:border-[#9c6148] rounded-[5px]"
                       size="large"
                       data-testid="go-to-cart-button"
                     >
-                      Go to cart
+                     <h1>Go to cart</h1> 
                     </Button>
                   </LocalizedClientLink>
                 </div>
@@ -206,7 +209,7 @@ const CartDropdown = ({
             ) : (
               <div>
                 <div className="flex py-16 flex-col gap-y-4 items-center justify-center">
-                  <div className="bg-gray-900 text-small-regular flex items-center justify-center w-6 h-6 rounded-full text-white">
+                  <div className="bg-[#B07A5D] text-small-regular flex items-center justify-center w-6 h-6 rounded-full text-white">
                     <span>0</span>
                   </div>
                   <span>Your shopping bag is empty.</span>

@@ -13,13 +13,13 @@ type ItemProps = {
 const Item = ({ item }: ItemProps) => {
   return (
     <Table.Row className="w-full" data-testid="product-row">
-      <Table.Cell className="!pl-0 p-4 w-24">
-        <div className="flex w-16">
+      <Table.Cell className="!pl-0 p-4 w-24 bg-[#F9F5F2]">
+        <div className="flex w-16 ">
           <Thumbnail thumbnail={item.thumbnail} size="square" />
         </div>
       </Table.Cell>
 
-      <Table.Cell className="text-left">
+      <Table.Cell className="text-left bg-[#F9F5F2]">
         <Text
           className="txt-medium-plus text-ui-fg-base"
           data-testid="product-name"
@@ -31,7 +31,7 @@ const Item = ({ item }: ItemProps) => {
         )}
       </Table.Cell>
 
-      <Table.Cell className="!pr-0">
+      <Table.Cell className="!pr-0 bg-[#F9F5F2]">
         <span className="!pr-0 flex flex-col items-end h-full justify-center">
           <span className="flex gap-x-1 ">
             <Text className="text-ui-fg-muted">

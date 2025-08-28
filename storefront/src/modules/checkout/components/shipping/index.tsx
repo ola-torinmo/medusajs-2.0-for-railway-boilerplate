@@ -60,7 +60,7 @@ const Shipping: React.FC<ShippingProps> = ({
   }, [isOpen])
 
   return (
-    <div className="bg-white">
+    <div className="bg-[#F9F5F2]">
       <div className="flex flex-row items-center justify-between mb-6">
         <Heading
           level="h2"
@@ -72,7 +72,7 @@ const Shipping: React.FC<ShippingProps> = ({
             }
           )}
         >
-          Delivery
+          <h1>Delivery </h1>
           {!isOpen && (cart.shipping_methods?.length ?? 0) > 0 && (
             <CheckCircleSolid />
           )}
@@ -135,11 +135,11 @@ const Shipping: React.FC<ShippingProps> = ({
 
           <Button
             size="large"
-            className="mt-6"
+            className="mt-6 bg-[#B07A5D] hover:bg-[#8c5a43] "
             onClick={handleSubmit}
             isLoading={isLoading}
             disabled={!cart.shipping_methods?.[0]}
-            data-testid="submit-delivery-option-button"
+            data-testid="submit-delivery-option-button   "
           >
             Continue to payment
           </Button>

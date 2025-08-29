@@ -78,7 +78,7 @@ const Hero = () => {
   return (
     <section className="relative">
       {/* Image + card wrapper */}
-      <div className="relative w-full md:h-[710px] h-[350px] overflow-hidden bg-[#F9F5F2]">
+      <div className="relative w-full md:h-[710px] h-[500px] overflow-hidden bg-[#F9F5F2]">
         
         {/* Background Images with Parallax Effect */}
         {slides.map((slide: Slide, index: number) => (
@@ -111,7 +111,7 @@ const Hero = () => {
 
         {/* Product info card with fade animation and dynamic positioning */}
         <div 
-          className={`absolute bottom-[0%] bg-[#F9F5F2] md:w-[450px] w-[250px] md:h-[218px] h-[120px] shadow-lg p-[30px] transition-all duration-500 ${
+          className={`absolute bottom-[0%] bg-[#F9F5F2] md:w-[450px] w-[220px] md:h-[218px] h-[120px] shadow-lg md:p-[30px] p-[15px] transition-all duration-500 ${
             isTransitioning ? 'opacity-0 translate-y-4' : 'opacity-100 translate-y-0'
           } ${
             currentSlide === 1 || currentSlide === 2 
@@ -119,16 +119,16 @@ const Hero = () => {
               : 'right-[0%]'
           }`}
         >
-          <h2 className="md:text-[26px] text-[18px] font-semibold text-[#101010] mb-2">
+          <h2 className="md:text-[26px] text-[16px] font-semibold text-[#101010] md:mb-2 mb-1">
             {slides[currentSlide].title}
           </h2>
-          <h3 className="md:text-[26px] text-[16px] font-semibold text-[#101010] mb-6">
+          <h3 className="md:text-[26px] text-[16px] font-semibold text-[#101010] md:mb-6 mb-3">
             {slides[currentSlide].subtitle}
           </h3>
          
           <Link
             href={slides[currentSlide].link}
-            className="inline-block bg-[#B07A5D] text-white font-semibold py-[10.5px] px-[25px] rounded transition-all duration-200 uppercase tracking-wide hover:bg-[#966348] hover:shadow-md transform hover:-translate-y-0.5"
+            className="inline-block bg-[#B07A5D] text-white font-semibold md:py-[10.5px] py-[5.5px] md:px-[25px] px-[12.5px] rounded transition-all duration-200 uppercase tracking-wide hover:bg-[#966348] hover:shadow-md transform hover:-translate-y-0.5"
           >
             {slides[currentSlide].buttonText} 
             <Image 
@@ -142,20 +142,20 @@ const Hero = () => {
         </div>
 
         {/* Slide indicators */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-3 z-10">
-          {slides.map((_slide: Slide, index: number) => (
-            <button
-              key={index}
-              onClick={() => goToSlide(index)}
-              className={`transition-all duration-300 ${
-                index === currentSlide 
-                  ? 'w-12 h-2 bg-[#B07A5D]' 
-                  : 'w-2 h-2 bg-white/60 hover:bg-white/80'
-              } rounded-full`}
-              aria-label={`Go to slide ${index + 1}`}
-            />
-          ))}
-        </div>
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 hidden md:flex space-x-3 z-10">
+  {slides.map((_slide: Slide, index: number) => (
+    <button
+      key={index}
+      onClick={() => goToSlide(index)}
+      className={`transition-all duration-300 ${
+        index === currentSlide
+          ? 'w-12 h-2 bg-[#B07A5D]'
+          : 'w-2 h-2 bg-white/60 hover:bg-white/80'
+      } rounded-full`}
+      aria-label={`Go to slide ${index + 1}`}
+    />
+  ))}
+</div>
       </div>
     </section>
   )

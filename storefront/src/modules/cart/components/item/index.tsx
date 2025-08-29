@@ -66,12 +66,12 @@ const Item = ({ item, type = "full" }: ItemProps) => {
 
       <Table.Cell className="text-left">
         <Text
-          className="txt-medium-plus text-ui-fg-base"
+          className="md:txt-medium-plus text-[14px] text-ui-fg-base"
           data-testid="product-title"
         >
           {item.product_title}
         </Text>
-        <LineItemOptions variant={item.variant} data-testid="product-variant" />
+        {/* <LineItemOptions variant={item.variant} data-testid="product-variant" /> */}
       </Table.Cell>
 
       {type === "full" && (
@@ -112,7 +112,7 @@ const Item = ({ item, type = "full" }: ItemProps) => {
         </Table.Cell>
       )}
 
-      <Table.Cell className="!pr-0">
+      <Table.Cell className="!pr-0 ">
         <span
           className={clx("!pr-0", {
             "flex flex-col items-end h-full justify-center": type === "preview",

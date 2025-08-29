@@ -9,7 +9,7 @@ import search from '../../../../../public/search.png'
 // import { Search, Heart } from "lucide-react"
 import Image from "next/image"
 import cart from '../../../../../public/cart.png'
-import logo from '../../../../../public/logo.png'
+import logo from '../../../../../public/logo2.png'
 
 
 export default async function Nav() {
@@ -25,7 +25,7 @@ export default async function Nav() {
       </div>
 
       {/* Main Navigation */}
-      <header className="relative py-[35px] mx-auto duration-200 bg-[#F9F5F2] border-ui-border-base">
+      <header className="relative py-[20px] mx-auto duration-200 bg-[#F9F5F2] border-ui-border-base">
         <nav className="content-container flex items-center justify-between w-full h-full">
           
           {/* Left side - Mobile menu only */}
@@ -39,7 +39,7 @@ export default async function Nav() {
               className="text-2xl font-serif italic text-gray-900 hover:text-gray-600 mr-8"
               data-testid="nav-store-link"
             >
-              <Image src={logo} alt="logo" className="w-[160px] h-[30px]" />
+              <Image src={logo} alt="logo" className="w-[90px] h-[60px]" />
             </LocalizedClientLink>
           </div>
 

@@ -12,7 +12,7 @@ const SkinHero: React.FC<SkinHeroProps> = () => {
   return (
      <section className="relative">
       {/* Image + card wrapper /} */}
-      <div className="relative w-full md:h-[710px] h-[350px] overflow-hidden">
+      <div className="relative w-full md:h-[710px] h-[400px] overflow-hidden">
         {/* {/ Background Image /} */}
         <Image
           src={sophi}
@@ -22,11 +22,11 @@ const SkinHero: React.FC<SkinHeroProps> = () => {
           priority
         />
         {/* {/ Product info card – now absolutely positioned */}
-        <div className="absolute bottom-[0%] left-[0%] bg-[#F9F5F2] md:w-[400px] w-[250px] md:h-[153px] h-[100px] shadow-sm p-[30px] ">
-          <h2 className="md:text-[26px] text-[22px] font-semibold text-[#101010] mb-2 ">
+        <div className="absolute bottom-[0%] left-[0%] bg-[#F9F5F2] md:w-[400px] w-[200px] md:h-[153px] h-[95px] shadow-sm md:p-[30px] p-[15px] ">
+          <h2 className="md:text-[26px] text-[16px] font-semibold text-[#101010] mb-2 ">
             EVERYTHING YOUR FACE
           </h2>
-          <h3 className="md:text-[26px] text-[22px] font-semibold text-[#101010] mb-6 ">
+          <h3 className="md:text-[26px] text-[16px] font-semibold text-[#101010] mb-6 ">
             NEEDS
           </h3>
          

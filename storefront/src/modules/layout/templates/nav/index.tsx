@@ -6,7 +6,7 @@ import CartButton from "@modules/layout/components/cart-button"
 // import SideMenu from "@modules/layout/components/side-menu"
 import heart from '../../../../../public/heart.png'
 import search from '../../../../../public/search.png'
-import { Search, Heart } from "lucide-react"
+// import { Search, Heart } from "lucide-react"
 import Image from "next/image"
 import cart from '../../../../../public/cart.png'
 import logo from '../../../../../public/logo.png'
@@ -56,19 +56,19 @@ export default async function Nav() {
                 NEW
               </LocalizedClientLink>
               <LocalizedClientLink 
-                href="/collections/bestsellers" 
+                href="/" 
                 className="text-[#10101080] hover:text-[#101010] text-[14px] font-semibold uppercase "
               >
                 BESTSELLERS
               </LocalizedClientLink>
               <LocalizedClientLink 
-                href="/collections/skin" 
+                href="/skin" 
                 className="text-[#10101080] hover:text-[#101010] text-[14px] font-semibold uppercase "
               >
                 SKIN
               </LocalizedClientLink>
               <LocalizedClientLink 
-                href="/collections/lips" 
+                href="/lips" 
                 className="text-[#10101080] hover:text-[#101010] text-[14px] font-semibold uppercase "
               >
                 LIPS

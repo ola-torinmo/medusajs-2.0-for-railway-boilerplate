@@ -134,8 +134,23 @@ const SkinProductSection: React.FC<SkinProductSectionProps> = ({ products, regio
           </div>
         )} */}
 
-        {/* Products Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8 p-[5px]">
+        {/* Mobile Slider - Shows only on mobile */}
+        <div className="block sm:hidden mb-8">
+          <div className="flex gap-4 overflow-x-auto scrollbar-hide px-4 py-2">
+            {filteredProducts.slice(0, 8).map((product) => (
+              <div key={product.id} className="flex-shrink-0 w-[280px] group">
+                <ProductPreview
+                  product={product}
+                  region={region}
+                  isFeatured
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Desktop/Tablet Grid - Shows on sm screens and up */}
+        <div className="hidden sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8 p-[5px]">
           {filteredProducts.slice(0, 8).map((product) => (
             <div key={product.id} className="group">
               <ProductPreview

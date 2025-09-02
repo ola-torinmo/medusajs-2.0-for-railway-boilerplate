@@ -4,17 +4,26 @@ import { Popover, Transition } from "@headlessui/react"
 import { ArrowRightMini, XMark } from "@medusajs/icons"
 import { Text, clx, useToggleState } from "@medusajs/ui"
 import { Fragment } from "react"
+import Image from "next/image"
 
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import CountrySelect from "../country-select"
 import { HttpTypes } from "@medusajs/types"
+import hamburger from '../../../../../public/hamburger.svg' // Import your hamburger icon
+import closecircle from '../../../../../public/closecircle.svg' // Import your close icon
 
 const SideMenuItems = {
-  Home: "/",
-  Store: "/store",
-  Search: "/search",
-  Account: "/account",
-  Cart: "/cart",
+  // Home: "/",
+  // Store: "/store",
+  // Search: "/search",
+  // Account: "/account",
+  // Cart: "/cart",
+
+  NEW: "/new",
+  BESTSELLERS: "/",
+  SKIN: "/skin",
+  LIPS: "/lips",
+  FINDYOURSHADE: "/findyourshade",
 }
 
 const SideMenu = ({ regions }: { regions: HttpTypes.StoreRegion[] | null }) => {
@@ -29,9 +38,14 @@ const SideMenu = ({ regions }: { regions: HttpTypes.StoreRegion[] | null }) => {
               <div className="relative flex h-full">
                 <Popover.Button
                   data-testid="nav-menu-button"
-                  className="relative h-full flex items-center transition-all ease-out duration-200 focus:outline-none hover:text-ui-fg-base"
+                  className="relative h-full flex items-center transition-all ease-out duration-200 focus:outline-none hover:opacity-70 p-2"
                 >
-                  Menu
+                  {/* Replace "Menu" text with hamburger icon */}
+                  <Image 
+                    src={hamburger} 
+                    alt="menu" 
+                    className="h-6 w-6"
+                  />
                 </Popover.Button>
               </div>
 
@@ -45,14 +59,15 @@ const SideMenu = ({ regions }: { regions: HttpTypes.StoreRegion[] | null }) => {
                 leaveFrom="opacity-100 backdrop-blur-2xl"
                 leaveTo="opacity-0"
               >
-                <Popover.Panel className="flex flex-col absolute w-full pr-4 sm:pr-0 sm:w-1/3 2xl:w-1/4 sm:min-w-min h-[calc(100vh-1rem)] z-30 inset-x-0 text-sm text-ui-fg-on-color m-2 backdrop-blur-2xl">
+                <Popover.Panel className="flex flex-col absolute w-full pr-4 sm:pr-0 sm:w-1/3 2xl:w-1/4 sm:min-w-min h-[calc(100vh-1rem)] z-30 inset-x-0 text-sm text-[#10101080] m-2 backdrop-blur-2xl">
                   <div
                     data-testid="nav-menu-popup"
-                    className="flex flex-col h-full bg-[rgba(3,7,18,0.5)] rounded-rounded justify-between p-6"
+                    className="flex flex-col h-full bg-[#F9F5F2] rounded-rounded justify-between p-6"
                   >
-                    <div className="flex justify-end" id="xmark">
+                    <div className="flex justify-end rounded-full border-black" id="xmark">
                       <button data-testid="close-menu-button" onClick={close}>
-                        <XMark />
+                        {/* <XMark /> */}
+                        <Image src={closecircle} alt="close menu" className="h-6 w-6 "/>
                       </button>
                     </div>
                     <ul className="flex flex-col gap-6 items-start justify-start">

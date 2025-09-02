@@ -7,7 +7,7 @@ const LipsHero = () => {
   return (
     <section className="relative">
   {/* Image + card wrapper /} */}
-  <div className="relative w-full md:h-[710px] h-[400px] overflow-hidden">
+  <div className="relative w-full md:h-[710px] h-[310px] overflow-hidden">
     {/* {/ Background Image /} */}
     <Image
       src={sophi}

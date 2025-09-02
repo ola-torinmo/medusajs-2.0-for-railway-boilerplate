@@ -232,7 +232,7 @@ const handleAddToCart = async () => {
           onClick={handleAddToCart}
           disabled={!inStock || !selectedVariant || !!disabled || isAdding}
           variant={getButtonVariant() as any}
-          className={`w-full h-12 font-semibold transition-all duration-200 ${
+          className={`w-full h-12 font-semibold transition-all duration-200 border-none outline-0 ${
             addToCartStatus === 'success' 
               ? 'bg-green-500 hover:bg-green-600 text-white' 
               : addToCartStatus === 'error'
@@ -259,7 +259,7 @@ const handleAddToCart = async () => {
         )}
 
         {/* Stock Information */}
-        {selectedVariant && (
+        {/* {selectedVariant && (
           <div className="text-xs text-gray-500 text-center">
             {selectedVariant.manage_inventory && (
               <p>
@@ -274,7 +274,7 @@ const handleAddToCart = async () => {
               <p>✅ Always available</p>
             )}
           </div>
-        )}
+        )} */}
 
         <MobileActions
           product={product}

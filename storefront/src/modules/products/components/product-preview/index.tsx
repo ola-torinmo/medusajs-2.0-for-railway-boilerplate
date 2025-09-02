@@ -7,6 +7,7 @@ import Thumbnail from "../thumbnail"
 import PreviewPrice from "./price"
 import  Star  from "../../../../../public/star.png"
 import Image from "next/image"
+import Link from "next/link"
 
 export default async function ProductPreview({
   product,
@@ -59,7 +60,7 @@ const StarRating = ({ rating = 5 }) => (
         <div className="p-4 text-center">
           {/* Product Title */}
           <h1
-            className="font-semibold text-gray-900 mb-2 uppercase tracking-wide text-sm line-clamp-2"
+            className="font-semibold text-[#101010CC] mb-2 uppercase tracking-wide text-sm line-clamp-2"
             data-testid="product-title"
           >
             {product.title}
@@ -78,12 +79,12 @@ const StarRating = ({ rating = 5 }) => (
           <StarRating rating={5} />
           
           {/* Buy Now Button - Takes you to product page */}
-          <LocalizedClientLink
+          <Link
             href={`/products/${product.handle}`}
-            className="inline-block w-full text-[#B07A5D] font-semibold py-2 w-[90px] rounded transition-colors duration-200 uppercase tracking-wide text-[14px] text-center border border-[#B07A5D]  hover:bg-[#B07A5D] hover:text-white"
+            className="inline-block w-full text-[#B07A5D] font-semibold py-2 w-[88.5px] rounded transition-colors duration-200 uppercase tracking-wide text-[14px] text-center border border-[#B07A5D]  hover:bg-[#B07A5D] hover:text-white"
           >
             BUY NOW
-          </LocalizedClientLink>
+          </Link>
         </div>
       </div>
     </LocalizedClientLink>

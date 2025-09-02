@@ -180,10 +180,10 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
           {/* Breadcrumb */}
           <div className="text-sm text-gray-500 mb-4">
             <LocalizedClientLink href="/" className="hover:text-gray-700 transition-colors">
-              Home
+             <span> Home </span>
             </LocalizedClientLink>
             <span className="mx-2">/</span>
-            <span>{product.title}</span>
+            <span className="lowercase">{product.title}</span>
           </div>
           <h1 className="text-2xl font-semibold">{product.title || "Untitled Product"}</h1>
 
@@ -255,7 +255,19 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
             </div>
           )}
 
-         
+          {/* Tags */}
+          {product.tags && product.tags.length > 0 ? (
+            <div className="flex gap-2 mt-2 flex-wrap">
+              {/* <h3 className="w-full text-sm font-semibold text-[#636363] mb-1">Tags:</h3> */}
+              {product.tags.map((tag) => (
+                <span key={tag.id} className="px-3 py-1 bg-[#FAFAFA] text-[#636363] text-sm rounded-[20px]">{tag.value}</span>
+              ))}
+            </div>
+          ) : (
+            <div className="mt-">
+              <p className="text-sm text-gray-400 italic">No tags available</p>
+            </div>
+          )}
 
           {/* Quantity Counter and Add to Cart in a row */}
           <div className="mt-6 flex items-center gap-4">
@@ -272,7 +284,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
                 type="number"
                 value={quantity}
                 onChange={handleQuantityChange}
-                className="w-12 pl-3 text-[#636363CC] text-center bg-[#F9F5F2] text-[16px] font-medium"
+                className="w-12 pl-1 text-[#636363CC] text-center bg-[#F9F5F2] text-[16px] font-medium"
                 min="1"
                 readOnly
               />
@@ -284,6 +296,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
                 <span className=""><Image src={add} alt="add"/></span>
               </button>
             </div>
+            
 
             {/* Add to Cart Button - Styled with brown/tan background like reference */}
             <div className="flex-1 mb-2 ">
@@ -299,21 +312,8 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
               </Suspense>
             </div>
           </div>
-          <div className="border border-[#DADEE3CC] my-3"></div>
+          {/* <div className="border border-[#DADEE3CC] my-3"></div> */}
 
-          {/* Tags */}
-          {product.tags && product.tags.length > 0 ? (
-            <div className="flex gap-2 mt- flex-wrap">
-              {/* <h3 className="w-full text-sm font-semibold text-[#636363] mb-1">Tags:</h3> */}
-              {product.tags.map((tag) => (
-                <span key={tag.id} className="px-3 py-1 bg-[#FAFAFA] text-[#636363] text-sm rounded-[20px]">{tag.value}</span>
-              ))}
-            </div>
-          ) : (
-            <div className="mt-">
-              <p className="text-sm text-gray-400 italic">No tags available</p>
-            </div>
-          )}
 
           {/* Debug Info - Enable this to debug */}
           {/* {process.env.NODE_ENV === 'development' && (

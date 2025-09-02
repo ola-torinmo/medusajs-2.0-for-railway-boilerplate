@@ -15,7 +15,7 @@ const Bestsellers = ({ products, region }: BestsellersProps) => {
       <div className="content-container">
         {/* Section Header */}
         <div className="mb-12 text-center">
-          <h2 className="text-[26px] font-bold text-gray-900 mb-2 uppercase tracking-wide">
+          <h2 className="md:text-[26px] text-[24px] md:font-bold font-semibold text-[#101010] mb-2 uppercase tracking-wide">
             SHOP OUR BESTSELLER ITEMS
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto">

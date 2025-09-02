@@ -19,7 +19,7 @@ const SideMenuItems = {
   // Account: "/account",
   // Cart: "/cart",
 
-  NEW: "/new",
+  NEW: "/store",
   BESTSELLERS: "/",
   SKIN: "/skin",
   LIPS: "/lips",

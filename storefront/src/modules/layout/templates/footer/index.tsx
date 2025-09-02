@@ -25,10 +25,10 @@ export default async function Footer() {
 
       {/* Main Footer */}
       <div className="bg-[#F9F5F2] ">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
           {/* Social Media Icons */}
           <div className="border-t border-gray-200 my-6"></div>
-          <div className="flex justify-center space-x-6 mb-8">
+          <div className="flex justify-center space-x-6 mb-8 pt-8">
             <a 
               href="https://instagram.com/sophysglobal" 
               target="_blank" 

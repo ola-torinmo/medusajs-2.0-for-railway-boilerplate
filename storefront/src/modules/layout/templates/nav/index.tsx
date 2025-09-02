@@ -89,7 +89,7 @@ export default async function Nav() {
             <div className="flex items-center h-full">
               <div className="flex items-center space-x-8">
                 <LocalizedClientLink 
-                  href="/products" 
+                  href="/store" 
                   className="text-[#10101080] hover:text-[#101010] text-[14px] font-semibold uppercase"
                 >
                   NEW

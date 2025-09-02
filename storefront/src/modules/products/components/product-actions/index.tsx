@@ -4,6 +4,7 @@ import { Button } from "@medusajs/ui"
 import { isEqual } from "lodash"
 import { useParams, useRouter } from "next/navigation"
 import { useEffect, useMemo, useRef, useState } from "react"
+import Image from "next/image"
 
 import { useIntersection } from "@lib/hooks/use-in-view"
 import Divider from "@modules/common/components/divider"
@@ -13,6 +14,7 @@ import MobileActions from "./mobile-actions"
 import ProductPrice from "../product-price"
 import { addToCart } from "@lib/data/cart"
 import { HttpTypes } from "@medusajs/types"
+import tickSuccess from '../../../../../public/tick-circle.svg' // Import your tick SVG
 
 type ProductActionsProps = {
   product: HttpTypes.StoreProduct
@@ -170,10 +172,10 @@ const handleAddToCart = async () => {
   }
 }
 
-  // Get button text based on state
+  // Get button text based on state - modified to remove tick emoji
   const getButtonText = () => {
     if (isAdding) return "Adding to cart..."
-    if (addToCartStatus === 'success') return "Added to cart! ✓"
+    if (addToCartStatus === 'success') return "Added to cart!"
     if (addToCartStatus === 'error') return "Error - Try again"
     if (!selectedVariant) return "Select variant"
     if (!inStock) return "Out of stock"
@@ -227,12 +229,12 @@ const handleAddToCart = async () => {
 
         <ProductPrice product={product} variant={selectedVariant} fallbackPriceData={fallbackPriceData} hidePrice={true}/>
 
-        {/* Enhanced Add to Cart Button */}
+        {/* Enhanced Add to Cart Button with Success Tick */}
         <Button
           onClick={handleAddToCart}
           disabled={!inStock || !selectedVariant || !!disabled || isAdding}
           variant={getButtonVariant() as any}
-          className={`w-full h-12 font-semibold transition-all duration-200 border-none outline-0 ${
+          className={`w-full h-12 font-semibold transition-all duration-200 border-none outline-0 flex items-center justify-center gap-2 ${
             addToCartStatus === 'success' 
               ? 'bg-green-500 hover:bg-green-600 text-white' 
               : addToCartStatus === 'error'
@@ -242,7 +244,15 @@ const handleAddToCart = async () => {
           isLoading={isAdding}
           data-testid="add-product-button"
         >
-          {getButtonText()}
+          {/* Show tick icon only when successful */}
+          {addToCartStatus === 'success' && (
+            <Image 
+              src={tickSuccess} 
+              alt="success" 
+              className="h-5 w-5"
+            />
+          )}
+          <h1 className="font-semibold">{getButtonText()} </h1>
         </Button>
 
         {/* Success/Error Messages */}

@@ -111,7 +111,7 @@ const Hero = () => {
 
         {/* Product info card with fade animation and dynamic positioning */}
         <div 
-          className={`absolute bottom-[0%] bg-[#F9F5F2] md:w-[450px] w-[220px] md:h-[218px] h-[120px] shadow-lg md:p-[30px] p-[15px] transition-all duration-500 ${
+          className={`absolute bottom-[0%] bg-[#F9F5F2] md:w-[450px] w-[220px]  shadow-lg md:p-[30px] p-[15px] transition-all duration-500 ${
             isTransitioning ? 'opacity-0 translate-y-4' : 'opacity-100 translate-y-0'
           } ${
             currentSlide === 1 || currentSlide === 2 

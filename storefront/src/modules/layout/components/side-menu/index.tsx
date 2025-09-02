@@ -59,24 +59,24 @@ const SideMenu = ({ regions }: { regions: HttpTypes.StoreRegion[] | null }) => {
                 leaveFrom="opacity-100 backdrop-blur-2xl"
                 leaveTo="opacity-0"
               >
-                <Popover.Panel className="flex flex-col absolute w-full pr-4 sm:pr-0 sm:w-1/3 2xl:w-1/4 sm:min-w-min h-[calc(100vh-1rem)] z-30 inset-x-0 text-sm text-[#10101080] m-2 backdrop-blur-2xl">
+                <Popover.Panel className="fixed inset-0 w-full h-full z-30 text-sm text-[#10101080] backdrop-blur-2xl">
                   <div
                     data-testid="nav-menu-popup"
-                    className="flex flex-col h-full bg-[#F9F5F2] rounded-rounded justify-between p-6"
+                    className="flex flex-col w-full h-full bg-[#F9F5F2] justify-between p-6"
                   >
-                    <div className="flex justify-end rounded-full border-black" id="xmark">
+                    <div className="flex justify-end" id="xmark">
                       <button data-testid="close-menu-button" onClick={close}>
                         {/* <XMark /> */}
                         <Image src={closecircle} alt="close menu" className="h-6 w-6 "/>
                       </button>
                     </div>
-                    <ul className="flex flex-col gap-6 items-start justify-start">
+                    <ul className="flex flex-col gap-8 items-left justify-center flex-1">
                       {Object.entries(SideMenuItems).map(([name, href]) => {
                         return (
                           <li key={name}>
                             <LocalizedClientLink
                               href={href}
-                              className="text-3xl leading-10 hover:text-ui-fg-disabled"
+                              className="text-[22px] leading-10 hover:text-ui-fg-disabled text-center"
                               onClick={close}
                               data-testid={`${name.toLowerCase()}-link`}
                             >
@@ -106,7 +106,7 @@ const SideMenu = ({ regions }: { regions: HttpTypes.StoreRegion[] | null }) => {
                         />
                       </div>
                       <Text className="flex justify-between txt-compact-small">
-                        © {new Date().getFullYear()} Medusa Store. All rights
+                        © {new Date().getFullYear()} All rights
                         reserved.
                       </Text>
                     </div>

@@ -24,11 +24,11 @@ export default async function Banner() {
           />
       
           {/* Product info card – now absolutely positioned */}
-          <div className="absolute bottom-[0%] left-[0%] bg-[#F9F5F2] md:w-[450px] w-[250px] md:h-[284px] h-[100px] shadow-sm p-8 ">
+          <div className="absolute bottom-[0%] left-[0%] bg-[#F9F5F2] md:w-[450px] w-[250px]  shadow-sm md:p-8 p-4 ">
             <h2 className="md:text-[26px] text-[22px] font-semibold text-[#101010] mb-2 tracking-leading">
              FIND YOUR PERFECT SHADE
             </h2>
-            <p className="md:text-[15px] text-[13px]  text-[#636363] mb-6 tracking-leading">
+            <p className="md:text-[15px] text-[13px]  text-[#636363] mb-6 tracking-leading hidden md:block">
               Browse our collection of lipsticks and lip gloss to find the perfect shade that complements your unique style.
             </p>
             

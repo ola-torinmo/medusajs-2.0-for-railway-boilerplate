@@ -284,7 +284,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
                 type="number"
                 value={quantity}
                 onChange={handleQuantityChange}
-                className="w-12 pl-1 text-[#636363CC] text-center bg-[#F9F5F2] text-[16px] font-medium"
+                className="w-12 pl-2 text-[#636363CC] text-center bg-[#F9F5F2] text-[16px] font-medium"
                 min="1"
                 readOnly
               />

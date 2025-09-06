@@ -124,9 +124,9 @@ export default async function Nav() {
             {/* Right side - Icons and Cart */}
             <div className="flex items-center gap-x-4 h-full flex-1 basis-0 justify-end">
               <div className="flex items-center gap-x-4">
-                <button className="text-gray-600 hover:text-gray-900">
+                {/* <button className="text-gray-600 hover:text-gray-900">
                   <Image src={search} alt="search" className="h-5 w-5 mt-1"/>
-                </button>
+                </button> */}
                 <button className="text-gray-600 hover:text-gray-900">
                   <Image src={heart} alt="wishlist" className="h-5 w-5 mt-1"/>
                 </button>

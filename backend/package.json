@@ -21,6 +21,7 @@
     "email:dev": "email dev --dir=./src/modules/email-notifications/templates --port=3002"
   },
   "dependencies": {
+    "@medusajs/admin": "^7.1.18",
     "@medusajs/admin-sdk": "2.8.8",
     "@medusajs/cli": "2.8.8",
     "@medusajs/dashboard": "2.8.8",

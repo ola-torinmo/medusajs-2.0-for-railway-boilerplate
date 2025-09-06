@@ -50,9 +50,9 @@ export default async function Nav() {
 
             {/* Right - Icons */}
             <div className="flex items-center gap-x-4">
-              <button className="text-gray-600 hover:text-gray-900">
+              {/* <button className="text-gray-600 hover:text-gray-900">
                 <Image src={search} alt="search" className="h-5 w-5"/>
-              </button>
+              </button> */}
               <button className="text-gray-600 hover:text-gray-900">
                 <Image src={heart} alt="wishlist" className="h-5 w-5"/>
               </button>
@@ -112,12 +112,12 @@ export default async function Nav() {
                 >
                   LIPS
                 </LocalizedClientLink>
-                <LocalizedClientLink 
+                {/* <LocalizedClientLink 
                   href="/collections/findyourshade" 
                   className="text-[#10101080] hover:text-[#101010] text-[14px] font-semibold uppercase"
                 >
                   FINDYOURSHADE
-                </LocalizedClientLink>
+                </LocalizedClientLink> */}
               </div>
             </div>
 

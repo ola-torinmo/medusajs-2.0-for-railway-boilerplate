@@ -99,4 +99,4 @@ export const WORKER_MODE =
 /**
  * Disable Admin
  */
-export const SHOULD_DISABLE_ADMIN = process.env.MEDUSA_DISABLE_ADMIN === 'true'
+export const SHOULD_DISABLE_ADMIN = process.env.MEDUSA_DISABLE_ADMIN === 'true' || false;

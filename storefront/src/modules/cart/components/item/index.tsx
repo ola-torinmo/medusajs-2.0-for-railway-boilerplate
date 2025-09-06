@@ -114,8 +114,8 @@ const Item = ({ item, type = "full" }: ItemProps) => {
 
       <Table.Cell className="!pr-0 ">
         <span
-          className={clx("!pr-0", {
-            "flex flex-col items-end h-full justify-center": type === "preview",
+          className={clx("", {
+            "flex flex-col items- h-full justify-center": type === "preview",
           })}
         >
           {type === "preview" && (

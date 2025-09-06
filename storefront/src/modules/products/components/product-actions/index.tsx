@@ -256,11 +256,11 @@ const handleAddToCart = async () => {
         </Button>
 
         {/* Success/Error Messages */}
-        {addToCartStatus === 'success' && (
+        {/* {addToCartStatus === 'success' && (
           <div className="text-center text-sm text-green-600 font-medium">
             Item successfully added to your cart!
           </div>
-        )}
+        )} */}
         
         {addToCartStatus === 'error' && (
           <div className="text-center text-sm text-red-600 font-medium">

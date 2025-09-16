@@ -1,6 +1,3 @@
-
-
-
 import { loadEnv, Modules, defineConfig } from '@medusajs/utils';
 import {
   ADMIN_CORS,
@@ -9,7 +6,7 @@ import {
   COOKIE_SECRET,
   DATABASE_URL,
   JWT_SECRET,
-  REDIS_URL,
+  // REDIS_URL, // ❌ COMMENTED OUT - Redis removed
   RESEND_API_KEY,
   RESEND_FROM_EMAIL,
   SENDGRID_API_KEY,
@@ -19,10 +16,10 @@ import {
   STRIPE_API_KEY,
   STRIPE_WEBHOOK_SECRET,
   WORKER_MODE,
-  MINIO_ENDPOINT,
-  MINIO_ACCESS_KEY,
-  MINIO_SECRET_KEY,
-  MINIO_BUCKET,
+  // MINIO_ENDPOINT, // ❌ COMMENTED OUT - Minio removed
+  // MINIO_ACCESS_KEY, // ❌ COMMENTED OUT - Minio removed
+  // MINIO_SECRET_KEY, // ❌ COMMENTED OUT - Minio removed
+  // MINIO_BUCKET, // ❌ COMMENTED OUT - Minio removed
   MEILISEARCH_HOST,
   MEILISEARCH_ADMIN_KEY
 } from 'lib/constants';
@@ -33,7 +30,7 @@ const medusaConfig = {
   projectConfig: {
     databaseUrl: DATABASE_URL,
     databaseLogging: false,
-    redisUrl: REDIS_URL,
+    // redisUrl: REDIS_URL, // ❌ COMMENTED OUT - Redis removed
     workerMode: WORKER_MODE,
     http: {
       adminCors: ADMIN_CORS,
@@ -58,6 +55,19 @@ const medusaConfig = {
       resolve: '@medusajs/file',
       options: {
         providers: [
+          // ✅ Using Cloudinary instead of Minio
+          {
+            resolve: '@medusajs/file-cloudinary',
+            id: 'cloudinary',
+            options: {
+              cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+              api_key: process.env.CLOUDINARY_API_KEY,
+              api_secret: process.env.CLOUDINARY_API_SECRET,
+            },
+          }
+          
+          // ❌ REMOVED - Minio configuration
+          /*
           ...(MINIO_ENDPOINT && MINIO_ACCESS_KEY && MINIO_SECRET_KEY ? [{
             resolve: './src/modules/minio-file',
             id: 'minio',
@@ -65,7 +75,7 @@ const medusaConfig = {
               endPoint: MINIO_ENDPOINT,
               accessKey: MINIO_ACCESS_KEY,
               secretKey: MINIO_SECRET_KEY,
-              bucket: MINIO_BUCKET // Optional, default: medusa-media
+              bucket: MINIO_BUCKET
             }
           }] : [{
             resolve: '@medusajs/file-local',
@@ -74,13 +84,17 @@ const medusaConfig = {
               upload_dir: 'static',
               backend_url:
                 process.env.NODE_ENV === 'production'
-                  ? 'https://storefront-production-fabe.up.railway.app/static' // Railway domain for production
+                  ? 'https://sophi-cosmetics.vercel.app/static' // ✅ FIXED - Updated to Vercel URL
                   : `${BACKEND_URL}/static`
             }
           }])
+          */
         ]
       }
     },
+    
+    // ❌ REMOVED - Redis modules (EventBus and WorkflowEngine)
+    /*
     ...(REDIS_URL ? [{
       key: Modules.EVENT_BUS,
       resolve: '@medusajs/event-bus-redis',
@@ -97,6 +111,19 @@ const medusaConfig = {
         }
       }
     }] : []),
+    */
+    
+    // ✅ Using in-memory alternatives for EventBus and WorkflowEngine
+    {
+      key: Modules.EVENT_BUS,
+      resolve: '@medusajs/event-bus-local',
+    },
+    {
+      key: Modules.WORKFLOW_ENGINE,
+      resolve: '@medusajs/workflow-engine-inmemory',
+    },
+
+    // ✅ Email notifications (keep if you have the keys)
     ...(SENDGRID_API_KEY && SENDGRID_FROM_EMAIL || RESEND_API_KEY && RESEND_FROM_EMAIL ? [{
       key: Modules.NOTIFICATION,
       resolve: '@medusajs/notification',
@@ -123,6 +150,8 @@ const medusaConfig = {
         ]
       }
     }] : []),
+
+    // ✅ Payment processing (keep if you have Stripe keys)
     ...(STRIPE_API_KEY && STRIPE_WEBHOOK_SECRET ? [{
       key: Modules.PAYMENT,
       resolve: '@medusajs/payment',
@@ -141,6 +170,7 @@ const medusaConfig = {
     }] : [])
   ],
   plugins: [
+    // ✅ Search functionality (keep if you have MeiliSearch)
     ...(MEILISEARCH_HOST && MEILISEARCH_ADMIN_KEY ? [{
       resolve: '@rokmohar/medusa-plugin-meilisearch',
       options: {
@@ -168,4 +198,3 @@ const medusaConfig = {
 
 console.log(JSON.stringify(medusaConfig, null, 2));
 export default defineConfig(medusaConfig);
-

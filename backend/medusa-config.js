@@ -16,6 +16,10 @@ import {
   STRIPE_API_KEY,
   STRIPE_WEBHOOK_SECRET,
   WORKER_MODE,
+  // ❌ CLOUDINARY IMPORTS COMMENTED OUT
+  // CLOUDINARY_CLOUD_NAME,
+  // CLOUDINARY_API_KEY,
+  // CLOUDINARY_API_SECRET,
   // MINIO_ENDPOINT, // ❌ COMMENTED OUT - Minio removed
   // MINIO_ACCESS_KEY, // ❌ COMMENTED OUT - Minio removed
   // MINIO_SECRET_KEY, // ❌ COMMENTED OUT - Minio removed
@@ -55,7 +59,18 @@ const medusaConfig = {
       resolve: '@medusajs/file',
       options: {
         providers: [
-          // ✅ Using Cloudinary instead of Minio
+          // ✅ Using local file storage (works without additional packages)
+          {
+            resolve: '@medusajs/file-local',
+            id: 'local',
+            options: {
+              upload_dir: 'static',
+              backend_url: `${BACKEND_URL}/static`
+            },
+          }
+          
+          // ❌ CLOUDINARY CONFIGURATION COMMENTED OUT
+          /*
           {
             resolve: '@medusajs/file-cloudinary',
             id: 'cloudinary',
@@ -65,8 +80,9 @@ const medusaConfig = {
               api_secret: process.env.CLOUDINARY_API_SECRET,
             },
           }
+          */
           
-          // ❌ REMOVED - Minio configuration
+          // ❌ MINIO CONFIGURATION COMMENTED OUT
           /*
           ...(MINIO_ENDPOINT && MINIO_ACCESS_KEY && MINIO_SECRET_KEY ? [{
             resolve: './src/modules/minio-file',
@@ -93,7 +109,7 @@ const medusaConfig = {
       }
     },
     
-    // ❌ REMOVED - Redis modules (EventBus and WorkflowEngine)
+    // ❌ REDIS MODULES COMMENTED OUT
     /*
     ...(REDIS_URL ? [{
       key: Modules.EVENT_BUS,

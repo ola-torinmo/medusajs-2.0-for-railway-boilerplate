@@ -17,9 +17,9 @@ import {
   STRIPE_WEBHOOK_SECRET,
   WORKER_MODE,
   // ❌ CLOUDINARY IMPORTS COMMENTED OUT
-  // CLOUDINARY_CLOUD_NAME,
-  // CLOUDINARY_API_KEY,
-  // CLOUDINARY_API_SECRET,
+  CLOUDINARY_CLOUD_NAME,
+  CLOUDINARY_API_KEY,
+  CLOUDINARY_API_SECRET,
   // MINIO_ENDPOINT, // ❌ COMMENTED OUT - Minio removed
   // MINIO_ACCESS_KEY, // ❌ COMMENTED OUT - Minio removed
   // MINIO_SECRET_KEY, // ❌ COMMENTED OUT - Minio removed
@@ -60,12 +60,23 @@ const medusaConfig = {
       options: {
         providers: [
           // ✅ Using local file storage (works without additional packages)
+          // {
+          //   resolve: '@medusajs/file-local',
+          //   id: 'local',
+          //   options: {
+          //     upload_dir: 'uploads',
+          //     backend_url: `${BACKEND_URL}/uploads`
+          //   },
+          // }
+
           {
-            resolve: '@medusajs/file-local',
-            id: 'local',
+            resolve: '@medusajs/file-cloudinary',
+            id: 'cloudinary',
             options: {
-              upload_dir: 'uploads',
-              backend_url: `${BACKEND_URL}/uploads`
+              cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+              api_key: process.env.CLOUDINARY_API_KEY,
+              api_secret: process.env.CLOUDINARY_API_SECRET,
+              secure: true,
             },
           }
           
@@ -78,6 +89,7 @@ const medusaConfig = {
               cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
               api_key: process.env.CLOUDINARY_API_KEY,
               api_secret: process.env.CLOUDINARY_API_SECRET,
+              secure: true,
             },
           }
           */

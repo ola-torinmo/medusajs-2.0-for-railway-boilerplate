@@ -1,4 +1,4 @@
-import { loadEnv, Modules, defineConfig } from '@medusajs/utils';
+import { loadEnv, Modules, defineConfig } from '@medusajs/framework/utils';
 import {
   ADMIN_CORS,
   AUTH_CORS,
@@ -61,7 +61,7 @@ const medusaConfig = {
             options: {
               access_key_id: SUPABASE_ACCESS_KEY_ID,
               secret_access_key: SUPABASE_SECRET_ACCESS_KEY,
-              region: 'us-east-1', // Supabase always uses this
+              region: 'eu-west-2', // Supabase always uses this
               bucket: 'products', // Your Supabase bucket name
               endpoint: SUPABASE_S3_ENDPOINT,
               // Supabase-specific settings

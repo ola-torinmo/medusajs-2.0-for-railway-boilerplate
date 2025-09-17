@@ -101,3 +101,9 @@ export const WORKER_MODE =
  * Disable Admin
  */
 export const SHOULD_DISABLE_ADMIN = process.env.MEDUSA_DISABLE_ADMIN === 'true' || false;
+
+// supabase config
+export const SUPABASE_ACCESS_KEY_ID = process.env.SUPABASE_ACCESS_KEY_ID || "";
+export const SUPABASE_SECRET_ACCESS_KEY = process.env.SUPABASE_SECRET_ACCESS_KEY || "";
+export const SUPABASE_S3_ENDPOINT = process.env.SUPABASE_S3_ENDPOINT || "";
+export const SUPABASE_PROJECT_REF = process.env.SUPABASE_PROJECT_REF || "";

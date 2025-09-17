@@ -6,7 +6,6 @@ import {
   COOKIE_SECRET,
   DATABASE_URL,
   JWT_SECRET,
-  // REDIS_URL, // ❌ COMMENTED OUT - Redis removed
   RESEND_API_KEY,
   RESEND_FROM_EMAIL,
   SENDGRID_API_KEY,
@@ -16,16 +15,13 @@ import {
   STRIPE_API_KEY,
   STRIPE_WEBHOOK_SECRET,
   WORKER_MODE,
-  // ❌ CLOUDINARY IMPORTS COMMENTED OUT
-  CLOUDINARY_CLOUD_NAME,
-  CLOUDINARY_API_KEY,
-  CLOUDINARY_API_SECRET,
-  // MINIO_ENDPOINT, // ❌ COMMENTED OUT - Minio removed
-  // MINIO_ACCESS_KEY, // ❌ COMMENTED OUT - Minio removed
-  // MINIO_SECRET_KEY, // ❌ COMMENTED OUT - Minio removed
-  // MINIO_BUCKET, // ❌ COMMENTED OUT - Minio removed
   MEILISEARCH_HOST,
-  MEILISEARCH_ADMIN_KEY
+  MEILISEARCH_ADMIN_KEY,
+  // Add Supabase imports
+  SUPABASE_ACCESS_KEY_ID,
+  SUPABASE_SECRET_ACCESS_KEY,
+  SUPABASE_S3_ENDPOINT,
+  SUPABASE_PROJECT_REF
 } from 'lib/constants';
 
 loadEnv(process.env.NODE_ENV, process.cwd());
@@ -34,7 +30,6 @@ const medusaConfig = {
   projectConfig: {
     databaseUrl: DATABASE_URL,
     databaseLogging: false,
-    // redisUrl: REDIS_URL, // ❌ COMMENTED OUT - Redis removed
     workerMode: WORKER_MODE,
     http: {
       adminCors: ADMIN_CORS,
@@ -59,87 +54,39 @@ const medusaConfig = {
       resolve: '@medusajs/file',
       options: {
         providers: [
-          // ✅ Using local file storage (works without additional packages)
+          // ✅ SUPABASE S3-COMPATIBLE STORAGE
+          {
+            resolve: '@medusajs/file-s3',
+            id: 's3',
+            options: {
+              access_key_id: SUPABASE_ACCESS_KEY_ID,
+              secret_access_key: SUPABASE_SECRET_ACCESS_KEY,
+              region: 'us-east-1', // Supabase always uses this
+              bucket: 'products', // Your Supabase bucket name
+              endpoint: SUPABASE_S3_ENDPOINT,
+              // Supabase-specific settings
+              s3ForcePathStyle: true,
+              signature_version: 'v4',
+              additional_client_config: {
+                forcePathStyle: true
+              }
+            },
+          }
+          
+          // ❌ CLOUDINARY REMOVED - Using Supabase instead
           // {
-          //   resolve: '@medusajs/file-local',
-          //   id: 'local',
+          //   resolve: '@medusajs/file-cloudinary',
+          //   id: 'cloudinary',
           //   options: {
-          //     upload_dir: 'uploads',
-          //     backend_url: `${BACKEND_URL}/uploads`
+          //     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+          //     api_key: process.env.CLOUDINARY_API_KEY,
+          //     api_secret: process.env.CLOUDINARY_API_SECRET,
+          //     secure: true,
           //   },
           // }
-
-          {
-            resolve: '@medusajs/file-cloudinary',
-            id: 'cloudinary',
-            options: {
-              cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-              api_key: process.env.CLOUDINARY_API_KEY,
-              api_secret: process.env.CLOUDINARY_API_SECRET,
-              secure: true,
-            },
-          }
-          
-          // ❌ CLOUDINARY CONFIGURATION COMMENTED OUT
-          /*
-          {
-            resolve: '@medusajs/file-cloudinary',
-            id: 'cloudinary',
-            options: {
-              cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-              api_key: process.env.CLOUDINARY_API_KEY,
-              api_secret: process.env.CLOUDINARY_API_SECRET,
-              secure: true,
-            },
-          }
-          */
-          
-          // ❌ MINIO CONFIGURATION COMMENTED OUT
-          /*
-          ...(MINIO_ENDPOINT && MINIO_ACCESS_KEY && MINIO_SECRET_KEY ? [{
-            resolve: './src/modules/minio-file',
-            id: 'minio',
-            options: {
-              endPoint: MINIO_ENDPOINT,
-              accessKey: MINIO_ACCESS_KEY,
-              secretKey: MINIO_SECRET_KEY,
-              bucket: MINIO_BUCKET
-            }
-          }] : [{
-            resolve: '@medusajs/file-local',
-            id: 'local',
-            options: {
-              upload_dir: 'static',
-              backend_url:
-                process.env.NODE_ENV === 'production'
-                  ? 'https://sophi-cosmetics.vercel.app/static' // ✅ FIXED - Updated to Vercel URL
-                  : `${BACKEND_URL}/static`
-            }
-          }])
-          */
         ]
       }
     },
-    
-    // ❌ REDIS MODULES COMMENTED OUT
-    /*
-    ...(REDIS_URL ? [{
-      key: Modules.EVENT_BUS,
-      resolve: '@medusajs/event-bus-redis',
-      options: {
-        redisUrl: REDIS_URL
-      }
-    },
-    {
-      key: Modules.WORKFLOW_ENGINE,
-      resolve: '@medusajs/workflow-engine-redis',
-      options: {
-        redis: {
-          url: REDIS_URL,
-        }
-      }
-    }] : []),
-    */
     
     // ✅ Using in-memory alternatives for EventBus and WorkflowEngine
     {

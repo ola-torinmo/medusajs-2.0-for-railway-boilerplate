@@ -65,6 +65,7 @@ const medusaConfig = {
               bucket: 'products', // Your Supabase bucket name
               endpoint: SUPABASE_S3_ENDPOINT,
               // Supabase-specific settings
+              file_url: process.env.SUPABASE_PUBLIC_URL || 'https://nbbyjmuwlvhshplrerd.supabase.co/storage/v1/object/public/products',
               s3ForcePathStyle: true,
               signature_version: 'v4',
               additional_client_config: {

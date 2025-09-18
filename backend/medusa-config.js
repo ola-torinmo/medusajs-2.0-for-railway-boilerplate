@@ -55,24 +55,36 @@ const medusaConfig = {
       options: {
         providers: [
           // ✅ SUPABASE S3-COMPATIBLE STORAGE
-          {
-            resolve: '@medusajs/file-s3',
-            id: 's3',
-            options: {
-              access_key_id: SUPABASE_ACCESS_KEY_ID,
-              secret_access_key: SUPABASE_SECRET_ACCESS_KEY,
-              region: 'eu-west-2', // Supabase always uses this
-              bucket: 'products', // Your Supabase bucket name
-              endpoint: SUPABASE_S3_ENDPOINT,
-              // Supabase-specific settings
-              file_url: process.env.SUPABASE_PUBLIC_URL || 'https://nbbyjmuwlvhshplrerd.supabase.co/storage/v1/object/public/products',
-              s3ForcePathStyle: true,
-              signature_version: 'v4',
-              additional_client_config: {
-                forcePathStyle: true
-              }
-            },
-          }
+          // {
+          //   resolve: '@medusajs/file-s3',
+          //   id: 's3',
+          //   options: {
+          //     access_key_id: SUPABASE_ACCESS_KEY_ID,
+          //     secret_access_key: SUPABASE_SECRET_ACCESS_KEY,
+          //     region: 'eu-west-2', // Supabase always uses this
+          //     bucket: 'products', // Your Supabase bucket name
+          //     endpoint: SUPABASE_S3_ENDPOINT,
+          //     // Supabase-specific settings
+          //     file_url: process.env.SUPABASE_PUBLIC_URL || 'https://nbbyjmuwlvhshplrerd.supabase.co/storage/v1/object/public/products',
+          //     s3ForcePathStyle: true,
+          //     signature_version: 'v4',
+          //     additional_client_config: {
+          //       forcePathStyle: true
+          //     }
+          //   },
+          // }
+
+            {
+        resolve: '@medusajs/file-supabase',
+        id: 'supabase',
+        options: {
+          referenceID: 'nbbyjmuwlvhshplrerd', // Your project ref
+          serviceKey: process.env.SUPABASE_SERVICE_KEY, // You need this - see below
+          bucketName: 'products',
+          // Optional: organize files in folders
+          directory: 'product-images'
+        },
+      }
           
           // ❌ CLOUDINARY REMOVED - Using Supabase instead
           // {

@@ -64,7 +64,7 @@ const medusaConfig = {
           region: 'eu-west-2', // Supabase region
           bucket: 'products',
           // FIXED: Corrected endpoint without /storage/v1/s3
-          endpoint: 'https://nbbyjmuwlvhshplrerd.storage.supabase.co',
+          endpoint: 'https://nbbyjmuwlvhshplrerd.storage.supabase.co/storage/v1/s3',
           s3ForcePathStyle: true,
           signature_version: 'v4',
           additional_client_config: {

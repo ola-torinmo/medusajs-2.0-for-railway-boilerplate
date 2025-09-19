@@ -55,23 +55,42 @@ const medusaConfig = {
       options: {
         providers: [
           // ✅ SUPABASE S3-COMPATIBLE STORAGE
-             {
-        resolve: '@medusajs/file-s3',
-        id: 's3',
-        options: {
-          access_key_id: SUPABASE_ACCESS_KEY_ID,
-          secret_access_key: SUPABASE_SECRET_ACCESS_KEY,
-          region: 'eu-west-2', // Supabase region
-          bucket: 'products',
-          // FIXED: Corrected endpoint without /storage/v1/s3
-          endpoint: 'https://nbbyjmuwlvhshplrerd.storage.supabase.co/storage/v1/s3',
-          s3ForcePathStyle: true,
-          signature_version: 'v4',
-          additional_client_config: {
-            forcePathStyle: true
-          }
-        },
-      }
+      //     {
+      //   resolve: '@medusajs/file-s3',
+      //   id: 's3',
+      //   options: {
+      //     access_key_id: SUPABASE_ACCESS_KEY_ID,
+      //     secret_access_key: SUPABASE_SECRET_ACCESS_KEY,
+      //     region: 'eu-west-2', // Supabase region
+      //     bucket: 'products',
+      //     // FIXED: Corrected endpoint without /storage/v1/s3
+      //     endpoint: 'https://nbbyjmuwlvhshplrerd.storage.supabase.co/storage/v1/s3',
+      //     s3ForcePathStyle: true,
+      //     signature_version: 'v4',
+      //     additional_client_config: {
+      //       forcePathStyle: true
+      //     }
+      //   },
+      // }
+      {
+  resolve: '@medusajs/file-s3',
+  id: 's3',
+  options: {
+    access_key_id: SUPABASE_ACCESS_KEY_ID,
+    secret_access_key: SUPABASE_SECRET_ACCESS_KEY,
+    region: 'eu-west-2', // Keep this for Supabase
+    bucket: 'products',
+    endpoint: 'https://nbbyjmuwlvhshplrerd.storage.supabase.co/storage/v1/s3',
+    s3ForcePathStyle: true,
+    signature_version: 'v4',
+    // Additional options that might help
+    additional_client_config: {
+      forcePathStyle: true,
+      signatureVersion: 'v4',
+      s3DisableBodySigning: false,
+    }
+  },
+}
 
       //       {
       //   resolve: '@medusajs/file-supabase',
